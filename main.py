@@ -25,10 +25,10 @@ def average_list(tuple_list):
     return avg_tuple
 
 
-def main():
-    args = sys.argv[1:]
-    pixel_size = int(input('Enter pixel size: '))
-    img = load_img(args[0])
+def pixelator(file_path, pixel_size):
+    img = load_img(file_path)
+
+    pixel_size = int(pixel_size)
 
     height, width = len(img), len(img[0])
     square = int(height / pixel_size)
@@ -45,13 +45,8 @@ def main():
                 for j in range(pixel_size):
                     img[k * pixel_size + i][m * pixel_size + j] = avg_tuple
 
-    name = input("Enter just the name of your file: ")
-    filename = str(name) + '.jpeg'
-    save_img(img, filename)
 
     arr = np.asarray(img, dtype=np.uint8)
     final_img = Image.fromarray(arr)
-    final_img.show()
+    return final_img
 
-
-main()
