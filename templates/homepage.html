@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Photo Pixelator</title>
+        <link rel="stylesheet" href="static/css/main.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pixelar">
+    </head>
+    <body>
+        <h2> Photo Pixelator </h2>
+        <div>
+            <form method="post" action="." enctype="multipart/form-data">
+                <span class="br"> <p> Provide an image: <br> </span>
+                <span class="brsmall"></span>
+                {{ image_error }}
+                <input type="file" id='img' name='img'
+                accept="image/jpeg, image/jpg"> </p>
+                <p>Enter pixel size:
+                <span class="brsmall"></span>
+                {{ pixel_error }}
+                <input name="pixel_size" /></p>
+                <p><input type="submit" value="Pixelate Image" /></p>
+            </form>
+        </div>
+    </body>
+</html>
