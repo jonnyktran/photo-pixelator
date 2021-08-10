@@ -14,6 +14,10 @@ div {
   line-height: 1.8em;
 }
 
+br {
+  line-height: 50%;
+}
+
 h2 {
   font-size: 6em;
   font-family: 'Pixelar';
@@ -44,9 +48,18 @@ input[type=submit]:hover {
   background-color: #24c278;
 }
 
-.br {
+p {
+  line-height: 1.5em;
+}
+
+#error {
+  color: #e6c200;
+  font-size: 18px;
+}
+
+.brsmall {
   display: block;
-  margin-bottom: 2em;
+  margin-bottom: -0.4em;
 }
 
 .container {
