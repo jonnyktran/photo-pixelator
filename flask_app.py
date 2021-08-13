@@ -15,7 +15,9 @@ app.config["DEBUG"] = True
 
 @app.route("/", methods=["GET", "POST"])
 def image_input():
-    if request.method == "POST" and request.form['pixel_size'].isnumeric() and not request.files['img'].filename == "":
+    # Image, Integer Pixel > 0
+    if request.method == "POST" and request.form['pixel_size'].isnumeric() and request.form['pixel_size'] != "0" \
+            and not request.files['img'].filename == "":
         image = request.files['img']
         img_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
         image.save(img_path)
@@ -28,15 +30,21 @@ def image_input():
         encoded_img_data = base64.b64encode(data.getvalue())
         return render_template("display.html", img_data=encoded_img_data.decode('utf-8'))
 
-    elif request.method == "POST" and not request.form['pixel_size'].isnumeric() and not request.files['img'].filename == "":
+    # Image, Non-Integer Pixel or 0
+    elif request.method == "POST" and (request.form['pixel_size'] == '0' or not request.form['pixel_size'].isnumeric()) \
+            and not request.files['img'].filename == "":
         return render_template("homepage.html", image_error=Markup('<span id="error"> Please upload the image again! </span> <span class="brsmall"></span>'),
-            pixel_error=Markup('<span id="error"> Please enter an integer! </span><span class="brsmall"></span>'))
+            pixel_error=Markup('<span id="error"> Please enter a positive integer! </span><span class="brsmall"></span>'))
 
-    elif request.method == "POST" and request.form['pixel_size'].isnumeric() and request.files['img'].filename == "":
-        return render_template("homepage.html", image_error=Markup('<span id="error"> Please select an image! </span> <span class="brsmall"></span>'))
+    # No image, non-zero integer pixel
+    elif request.method == "POST" and (request.form['pixel_size'] != '0' and request.form['pixel_size'].isnumeric()) \
+            and request.files['img'].filename == "":
+        return render_template("homepage.html", image_error=Markup('<span id="error"> Please select an image! </span> <span class="brsmall"></span>'),
+            pixel_error=Markup('<span id="error"> Please re-enter the pixel size! </span><span class="brsmall"></span>'))
 
+    # No Image, No pixel
     elif request.method == "POST":
         return render_template("homepage.html", image_error=Markup('<span id="error"> Please select an image! </span> <span class="brsmall"></span>'),
-            pixel_error=Markup('<span id="error"> Please enter an integer! </span><span class="brsmall"></span>'))
+            pixel_error=Markup('<span id="error"> Please enter a positive integer! </span><span class="brsmall"></span>'))
 
     return render_template("homepage.html")
