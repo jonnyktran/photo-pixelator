@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Image</title>
+    <title>Pixelated Image</title>
+    <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
-    <img id="picture" src="data:image/jpeg;base64,{{ img_data }}">
+    <div class='center'>
+        <img id="picture" src="data:image/jpeg;base64,{{ img_data }}">
+        <br>
+        <br>
+        <button id='refresh' onClick="window.location.href=window.location.href">Pixelate Another Image</button>
+    </div>
 </body>
 </html>

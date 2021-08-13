@@ -9,9 +9,8 @@ body {
   text-align-last: center;
 }
 
-div {
-  font-size: 1.5em;
-  line-height: 1.8em;
+p {
+  line-height: 1.5em;
 }
 
 br {
@@ -48,13 +47,48 @@ input[type=submit]:hover {
   background-color: #24c278;
 }
 
-p {
-  line-height: 1.5em;
+#fontsize {
+  font-size: 1.5em;
+  line-height: 1.8em;
+}
+
+#refresh {
+  background-color: #93ebc2;
+  border: none;
+  color: black;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px 1px;
+  border-radius: 12px;
+  font-family: 'Georgia';
+  opacity: 1;
+  transition: background-color 0.75s;
+}
+
+#refresh:hover {
+  transition: 0.5s;
+  background-color: #24c278;
 }
 
 #error {
   color: #e6c200;
   font-size: 18px;
+}
+
+#picture {
+  border: 6px solid #e4b262;
+  max-width:100%;
+  height:auto;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .brsmall {
