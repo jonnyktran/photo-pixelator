@@ -1,32 +1,8 @@
-
 from PIL import Image
+from scipy.spatial.distance import cdist
 import numpy as np
-import math
 
-
-def load_img(filename):
-    pil_img = Image.open(filename)
-    arr = np.array(pil_img.getdata(), dtype=np.uint8).reshape(pil_img.height, pil_img.width, 3)
-    img = [[(p[0], p[1], p[2]) for p in row] for row in arr]
-    return img
-
-
-def save_img(img, filename):
-    arr = np.asarray(img, dtype=np.uint8)
-    pil_img = Image.fromarray(arr)
-    pil_img.save(filename, format='jpeg')
-
-
-def average_list(tuple_list):
-    length = len(tuple_list)
-    a = [p[0] for p in tuple_list]
-    b = [p[1] for p in tuple_list]
-    c = [p[2] for p in tuple_list]
-    avg_tuple = (sum(a) / length, sum(b) / length, sum(c) / length)
-    return avg_tuple
-
-
-basic_palette = [(92,39,94), # purple
+BASIC_PALETTE = [(92,39,94), # purple
                  (177,62,83), # red
                  (239,125,88), # orange
                  (255,205,117), # yellow
@@ -42,7 +18,7 @@ basic_palette = [(92,39,94), # purple
                  (51,60,87), # blue gray
                  (254,255,255)] # white
 
-horizon_palette = [(109,247,193), # mint
+HORIZON_PALETTE = [(109,247,193), # mint
                    (14,173,193), # teal
                    (95,108,129), # gray
                    (58,52,87), # navy purple
@@ -55,7 +31,7 @@ horizon_palette = [(109,247,193), # mint
                    (244,140,182), # pink
                    (246,182,158)] # salmon
 
-pico_palette = [(0,0,0), # black
+PICO_PALETTE = [(0,0,0), # black
                 (29,43,83), # navy
                 (126,38,82), # burgundy
                 (171,82,54), # light brown
@@ -71,7 +47,7 @@ pico_palette = [(0,0,0), # black
                 (254,119,168), # pink
                 (255,204,171)] # tan
 
-pokemon_palette = [(130,200,214), # aqua blue
+POKEMON_PALETTE = [(130,200,214), # aqua blue
                    (189,32,32), # blood red
                    (180,99,34), # cafe brown
                    (207,131,43), # light brown
@@ -121,56 +97,58 @@ pokemon_palette = [(130,200,214), # aqua blue
                    (103,166,200), # pikachu blue
                    (115,187,152), # dark mint
                    (105,26,43), # dark red
-                   (13,66,95), # screen blue
+                   (13,66,95), # Eastern blue
                    (209,175,84), # mustard
                    (31,119,35)] # shaded green
 
-all_palette = basic_palette + horizon_palette + pico_palette + pokemon_palette
+ALL_PALETTE = BASIC_PALETTE + HORIZON_PALETTE + PICO_PALETTE + POKEMON_PALETTE
 
 
-def closest_color(avg):
-    d = -1 # error
-    color = () # color tuple
+def load_img(filename):
+    pil_img = Image.open(filename)
+    return np.array(pil_img.getdata(), dtype=np.uint8).reshape(pil_img.height, pil_img.width, 3)
 
-    for c in all_palette:
-        tuple_subtract = (avg[0] - c[0], avg[1] - c[1], avg[2] - c[2])
 
-        error = (tuple_subtract[0] ** 2) + (tuple_subtract[1] ** 2) +  (tuple_subtract[2] ** 2)
-        error = math.sqrt(error)
+def average_list(tuple_list):
+    length = len(tuple_list)
+    r = [p[0] for p in tuple_list]
+    g = [p[1] for p in tuple_list]
+    b = [p[2] for p in tuple_list]
+    return (sum(r) / length, sum(g) / length, sum(b) / length)
 
-        if (d == -1 or error < d):
-            d = error
-            color = c
 
-    return color
+def closest_color(avg_tuple, palette_arr):
+    avg_tuple_array = np.asarray(avg_tuple).reshape(1, -1)
+    return ALL_PALETTE[cdist(avg_tuple_array, palette_arr).argmin()]
 
 
 def pixelator(file_path, pixel_size):
-    img = load_img(file_path)
-    pixel_size = int(pixel_size)
+    img_arr = load_img(file_path)
+    palette_arr = np.asarray(ALL_PALETTE)
 
-    height, width = len(img), len(img[0])
+    height, width, pixel_size = len(img_arr), len(img_arr[0]), int(pixel_size)
+    square_h, square_w = int(height / pixel_size)+1, int(width / pixel_size)+1
 
-    square = int(height / pixel_size)
-    square2 = int(width / pixel_size)
+    for k in range(square_h):
+        for m in range(square_w):
+            index_list = [(k * pixel_size + i, m * pixel_size + j)
+                          for j in range(pixel_size)
+                          for i in range(pixel_size)
+                          if (k * pixel_size + i) < height and (m * pixel_size + j) < width]
 
-    for k in range(square + 1):
-        for m in range(square2 + 1):
-            list_tuple = []
-            for i in range(pixel_size):
-                for j in range(pixel_size):
-                    if (k * pixel_size + i) < height and (m * pixel_size + j) < width:
-                        list_tuple.append(img[k * pixel_size + i][m * pixel_size + j])
-            if len(list_tuple) < 1:
+            tuple_list = [img_arr[index_tuple[0]][index_tuple[1]]
+                          for index_tuple in index_list
+                          if index_tuple[0] < height and index_tuple[1] < width]
+
+            if len(tuple_list) < 1:
                 continue
-            avg_tuple = average_list(list_tuple)
-            color = closest_color(avg_tuple)
-            for i in range(pixel_size):
-                for j in range(pixel_size):
-                    if (k * pixel_size + i) < height and (m * pixel_size + j) < width:
-                        img[k * pixel_size + i][m * pixel_size + j] = color
 
-    arr = np.asarray(img, dtype=np.uint8)
-    final_img = Image.fromarray(arr)
-    return final_img
+            avg_tuple = average_list(tuple_list)
+            color = closest_color(avg_tuple, palette_arr)
 
+            for index_tuple in index_list:
+                if index_tuple[0] < height and index_tuple[1] < width:
+                    img_arr[index_tuple[0]][index_tuple[1]] = color
+
+    return Image.fromarray(img_arr)
+ 

@@ -1,4 +1,3 @@
-
 from main import pixelator
 from flask import Flask, request, render_template
 from markupsafe import Markup
@@ -47,3 +46,4 @@ def image_input():
             pixel_error=Markup('<span id="error"> Please enter a positive integer! </span><span class="brsmall"></span>'))
 
     return render_template("homepage.html")
+ 
