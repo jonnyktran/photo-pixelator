@@ -12,24 +12,24 @@ http://wlnguyen.pythonanywhere.com/
 
 Original                   |  Pixel Size: 8
 :-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/52009450/131593165-25495d8e-fa46-4034-9c07-9dc47e1483b2.jpeg" width = "600">  |  <img src="https://user-images.githubusercontent.com/52009450/131593329-ca46744c-7d6c-4eb2-aa2c-57828f8e0faf.jpeg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125796-b39cebf0-7804-468d-adbc-1caab2e8d0fd.jpg" width = "600">  |  <img src="https://user-images.githubusercontent.com/61168867/132125770-4ffcda56-52ca-48f2-9ebd-0c27c041d4f6.jpg" width = "600">
 **Pixel Size: 16**         |  **Pixel Size: 32**
-<img src="https://user-images.githubusercontent.com/52009450/131595716-a25d87db-a455-4727-a862-41f1b137f043.jpeg" width = "600">  |  <img src="https://user-images.githubusercontent.com/52009450/131595736-b6ad7ffa-ee44-4dbb-b9fe-ce1c67a87657.jpeg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125818-4d8f5f62-773e-460e-a670-b018ee8d664e.jpg" width = "600">  |  <img src="https://user-images.githubusercontent.com/61168867/132125841-dafa7998-888c-4020-8bf6-d021ecf77914.jpg" width = "600">
 
 <br>
 
 Original                   |  Pixel Size: 8
 :-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/52009450/131595886-21118755-af8d-4f57-ada7-4d4a5889ce73.jpeg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/52009450/131595923-97d01f5b-665e-4bd3-9573-05615aa043d9.jpeg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125910-78e845e7-f61d-420f-8d8f-9395e11a22f9.jpg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/61168867/132125891-bff134a3-0617-49d6-8ed0-eff48c2536b7.jpg" width = "600">
 **Pixel Size: 16**         |  **Pixel Size: 32**
-<img src="https://user-images.githubusercontent.com/52009450/131595955-823a8424-0ec4-4d17-87b9-3728db5f1644.jpeg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/52009450/131595975-22f6ac53-e3c5-4c0a-919b-546aeaed4340.jpeg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125903-c9269ce8-2856-4ca6-a174-06bd4fa4f31a.jpg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/61168867/132125918-7fbbcf72-d1ee-4b87-b3a2-4894ca3c32c4.jpg" width = "600">
 
 # Future Improvements
 In the future, we would like to improve the Photo Pixelator by:
 - Adding a loading icon
 - Making pixelation more accurate
 - Making the website mobile-friendly
-- Allowing users to choose a color palette
+- Allowing users to choose from several color palettes
 
 # Creators
 Jonny Tran and Wesley Nguyen
