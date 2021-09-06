@@ -1,15 +1,13 @@
 # Photo Pixelator
-
-Program that converts a .jpeg/.jpg image into pixel art.
+A website for converting .jpeg/.jpg images into pixel art.
 
 The input image is broken into N x N squares, where N is the user input for pixel size. Within each square, the average RGB value is computed using the RGB values of the individual pixels. Using a predesigned color palette of RGB values, the program calculates the standard error between the average RGB value of a square and every RGB value in the palette. The color from the palette with the lowest error is used for the entire N x N square.
 
 # Website
-You can try out our program here: <br>
-http://wlnguyen.pythonanywhere.com/
+You can check out our website here: <br>
+https://wlnguyen.pythonanywhere.com
 
 # Pixelation Examples
-
 Original                   |  Pixel Size: 8
 :-------------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/61168867/132125796-b39cebf0-7804-468d-adbc-1caab2e8d0fd.jpg" width = "600">  |  <img src="https://user-images.githubusercontent.com/61168867/132125770-4ffcda56-52ca-48f2-9ebd-0c27c041d4f6.jpg" width = "600">
@@ -20,15 +18,15 @@ Original                   |  Pixel Size: 8
 
 Original                   |  Pixel Size: 8
 :-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/61168867/132125910-78e845e7-f61d-420f-8d8f-9395e11a22f9.jpg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/61168867/132125891-bff134a3-0617-49d6-8ed0-eff48c2536b7.jpg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125910-78e845e7-f61d-420f-8d8f-9395e11a22f9.jpg" width = "600">  |  <img src="https://user-images.githubusercontent.com/61168867/132125891-bff134a3-0617-49d6-8ed0-eff48c2536b7.jpg" width = "600">
 **Pixel Size: 16**         |  **Pixel Size: 32**
-<img src="https://user-images.githubusercontent.com/61168867/132125903-c9269ce8-2856-4ca6-a174-06bd4fa4f31a.jpg" width = "600" >  |  <img src="https://user-images.githubusercontent.com/61168867/132125918-7fbbcf72-d1ee-4b87-b3a2-4894ca3c32c4.jpg" width = "600">
+<img src="https://user-images.githubusercontent.com/61168867/132125903-c9269ce8-2856-4ca6-a174-06bd4fa4f31a.jpg" width = "600">  |  <img src="https://user-images.githubusercontent.com/61168867/132125918-7fbbcf72-d1ee-4b87-b3a2-4894ca3c32c4.jpg" width = "600">
 
 # Future Improvements
 In the future, we would like to improve the Photo Pixelator by:
 - Adding a loading icon
-- Making pixelation more accurate
 - Making the website mobile-friendly
+- Implementing a drag-and-drop feature
 - Allowing users to choose from several color palettes
 
 # Creators
