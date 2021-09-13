@@ -6,7 +6,7 @@ import base64
 import io
 
 app = Flask(__name__)
-app.config['UPLOADS_FOLDER'] = 'mysite/static/uploads'
+app.config['UPLOADS_FOLDER'] = 'mysite/uploads'
 
 
 @app.route("/", methods=["GET", "POST"])
