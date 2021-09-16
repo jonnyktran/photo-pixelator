@@ -1,6 +1,6 @@
 from PIL import Image
-from scipy.spatial.distance import cdist
 import numpy as np
+from numba import njit
 
 RESURRECT64_PALETTE = [(46, 34, 47),  # bastille
                        (62, 53, 70),  # ship gray
@@ -68,52 +68,74 @@ RESURRECT64_PALETTE = [(46, 34, 47),  # bastille
                        (253, 203, 176)]  # light apricot
 
 
-# Convert image into a numpy array of RGB values
+# Convert image into numpy array of RGB values
 def load_img(filename):
     pil_img = Image.open(filename)
+    max_size = (1280, 1280)
+    pil_img.thumbnail(max_size, Image.LANCZOS)
     return np.array(pil_img.getdata(), dtype=np.uint8).reshape(pil_img.height, pil_img.width, 3)
 
 
-# Compute average RGB value from a list of RGB values
-def average_color(rgb_list):
-    length = len(rgb_list)
-    r = [c[0] for c in rgb_list]
-    g = [c[1] for c in rgb_list]
-    b = [c[2] for c in rgb_list]
-    return (sum(r) / length, sum(g) / length, sum(b) / length)
+# Assign each pixel average color of its square and return True if no valid pixels
+@njit(fastmath=True)
+def assign_average_color(square_row, square_col, height, width, pixel_size, img_arr):
+    row_start, col_start = square_row * pixel_size, square_col * pixel_size
+
+    # Compute average RGB value of square
+    r, g, b, num_pixels = 0, 0, 0, 0
+    for row in range(pixel_size):
+        if (row_start + row) >= height:
+            break
+        for col in range(pixel_size):
+            if (col_start + col) >= width:
+                break
+            rgb = img_arr[row_start + row][col_start + col]
+            r += rgb[0]
+            g += rgb[1]
+            b += rgb[2]
+            num_pixels += 1
+
+    if num_pixels < 1:
+        return True
+
+    avg_color = (r / num_pixels, g / num_pixels, b / num_pixels)
+
+    # Assign average color to all pixels in square
+    for row in range(pixel_size):
+        if (row_start + row) >= height:
+            break
+        for col in range(pixel_size):
+            if (col_start + col) >= width:
+                break
+            img_arr[row_start + row][col_start + col] = avg_color
 
 
-# Find closest color from the palette array
-def closest_color(rgb_tuple, palette_arr):
-    rgb_tuple_array = np.asarray(rgb_tuple).reshape(1, -1)
-    return RESURRECT64_PALETTE[cdist(rgb_tuple_array, palette_arr).argmin()]
-
-
-# Pixelate image based on a given pixel size
+# Pixelate image based on given pixel size
 def pixelator(file_path, pixel_size):
     img_arr = load_img(file_path)
-    palette_arr = np.asarray(RESURRECT64_PALETTE)
-
     height, width, pixel_size = len(img_arr), len(img_arr[0]), int(pixel_size)
-    square_h, square_w = int(height / pixel_size)+1, int(width / pixel_size)+1
 
-    for k in range(square_h):
-        for m in range(square_w):
-            index_list = [(k * pixel_size + i, m * pixel_size + j)
-                          for j in range(pixel_size)
-                          for i in range(pixel_size)
-                          if (k * pixel_size + i) < height and (m * pixel_size + j) < width]
+    # Create PIL image in mode 'P' using color palette
+    palette_list = list(sum(RESURRECT64_PALETTE, ()))
+    palette_img = Image.new('P', (8, 8))
+    palette_img.putpalette(palette_list)
 
-            rgb_list = [img_arr[index_tuple[0]][index_tuple[1]]
-                        for index_tuple in index_list]
+    # Skip extra computation when pixel size is 1
+    if pixel_size == 1:
+        pixel_img = Image.fromarray(img_arr)
+        pixel_img = pixel_img.quantize(palette=palette_img, dither=0)
+        return pixel_img.convert('RGB')
 
-            if len(rgb_list) < 1:
-                continue
+    # Divide image into squares based on pixel size
+    square_h, square_w = height//pixel_size + 1, width//pixel_size + 1
+    for square_row in range(square_h):
+        for square_col in range(square_w):
+            # Assign each pixel average color of its square
+            no_valid_pixels = assign_average_color(square_row, square_col, height, width, pixel_size, img_arr)
+            if no_valid_pixels:
+                break
 
-            avg_color = average_color(rgb_list)
-            color = closest_color(avg_color, palette_arr)
-
-            for index_tuple in index_list:
-                img_arr[index_tuple[0]][index_tuple[1]] = color
-
-    return Image.fromarray(img_arr)
+    # Use PIL quantize to assign each pixel nearest color from palette
+    pixel_img = Image.fromarray(img_arr)
+    pixel_img = pixel_img.quantize(palette=palette_img, dither=0)
+    return pixel_img.convert('RGB')
