@@ -70,7 +70,7 @@ RESURRECT64_PALETTE = [(46, 34, 47),  # bastille
 
 # Convert image into numpy array of RGB values
 def load_img(filename):
-    pil_img = Image.open(filename)
+    pil_img = Image.open(filename).convert('RGB')
     max_size = (1280, 1280)
     pil_img.thumbnail(max_size, Image.LANCZOS)
     return np.array(pil_img.getdata(), dtype=np.uint8).reshape(pil_img.height, pil_img.width, 3)

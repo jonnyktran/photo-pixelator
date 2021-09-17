@@ -1,5 +1,5 @@
 # Photo Pixelator
-A website for converting .jpeg/.jpg images into pixel art.
+A website for converting images into pixel art.
 
 The input image is broken into squares of N x N pixels, where N is the pixel size provided by the user. Within each square, the average RGB value is computed using the RGB values of the individual pixels. From a predesigned color palette of 64 colors, the nearest color is found and assigned to each square. The result is a pixel art version of the original image.
 
