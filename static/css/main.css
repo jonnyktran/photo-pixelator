@@ -2,8 +2,8 @@ body {
   background-color: #00203f;
   margin: 0;
   padding: 0;
-  font-family: 'Georgia';
-  color: #FFFFFF;
+  font-family: "Georgia";
+  color: #ffffff;
   text-align-last: center;
 }
 
@@ -15,16 +15,24 @@ br {
   line-height: 50%;
 }
 
+a {
+  color: #e6c200;
+}
+
+a:hover, a:focus {
+  color: #e4b262;
+}
+
 h2 {
   font-size: 6em;
-  font-family: 'Pixelar';
+  font-family: "Pixelar";
   margin-top: 40px;
   text-align: center;
   width: 100%;
   letter-spacing: -2px;
 }
 
-input[type=submit] {
+input[type="submit"] {
   background-color: #93ebc2;
   border: none;
   color: black;
@@ -35,12 +43,12 @@ input[type=submit] {
   font-size: 16px;
   margin: 1px 1px;
   border-radius: 12px;
-  font-family: 'Georgia';
+  font-family: "Georgia";
   opacity: 1;
   transition: background-color 0.75s;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   transition: 0.5s;
   background-color: #24c278;
 }
@@ -51,7 +59,7 @@ select {
   height: 25px;
 }
 
-#fontsize {
+#user-input {
   font-size: 1.5em;
   line-height: 1.8em;
 }
@@ -67,7 +75,7 @@ select {
   font-size: 16px;
   margin: 1px 1px;
   border-radius: 12px;
-  font-family: 'Georgia';
+  font-family: "Georgia";
   opacity: 1;
   transition: background-color 0.75s;
 }

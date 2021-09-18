@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.75">
         <title>Photo Pixelator</title>
         <link rel="stylesheet" href="static/css/main.css">
         <link rel="shortcut icon" type="image/x-icon" href="static/umbreon_favicon.png"/>
     </head>
     <body>
         <h2> Photo Pixelator </h2>
-        <div id = 'fontsize'>
+        <div id="user-input">
             <form method="post" action="." enctype="multipart/form-data">
                 <span class="br"> <p> Provide an image: <br> </span>
                 <span class="brsmall"></span>
                 {{ image_error }}
-                <input type="file" id='img' name='img'
+                <input type="file" id="img" name="img"
                 accept="image/jpeg, image/jpg, image/png"> </p>
                 <p>Enter pixel size:
                 <span class="brsmall"></span>
@@ -21,5 +23,8 @@
                 <p><input type="submit" value="Pixelate Image" /></p>
             </form>
         </div>
+        <br>
+        <br>
+        <div>Visit our <a href="https://github.com/jonathanktran/photo-pixelator#readme" target="_blank">GitHub</a> to find out how it works!</div>
     </body>
 </html>
