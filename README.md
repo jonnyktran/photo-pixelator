@@ -24,10 +24,10 @@ Original                   |  Pixel Size: 8
 
 # Future Improvements
 In the future, we would like to improve the Photo Pixelator by:
-- Adding a loading icon
-- Making the website mobile-friendly
-- Implementing a drag-and-drop feature
-- Allowing users to choose from several color palettes
+- Adding a loading animation
+- Implementing drag-and-drop uploading
+- Showing a before and after image comparison
+- Giving users the option to choose from several color palettes
 
 # Creators
 Jonny Tran and Wesley Nguyen

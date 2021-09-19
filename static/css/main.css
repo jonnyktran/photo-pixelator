@@ -1,18 +1,58 @@
-body {
-  background-color: #00203f;
-  margin: 0;
-  padding: 0;
-  font-family: "Georgia";
-  color: #ffffff;
-  text-align-last: center;
+#error {
+  color: #e4b262;
+  font-size: 20px;
 }
 
-p {
-  line-height: 1.5em;
+#github-link {
+  margin-bottom: 4em;
+  font-size: 17px;
 }
 
-br {
-  line-height: 50%;
+#picture {
+  border: 6px solid #e4b262;
+  max-height: 60vh;
+  max-width: 90vw;
+  margin-top: 50px;
+}
+
+#refresh {
+  width: 197px;
+  background-color: #93ebc2;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  font-family: Georgia;
+  opacity: 1;
+  transition: background-color 0.75s;
+  margin: 1px 1px 20px;
+  padding: 15px;
+}
+
+#user-input {
+  font-size: 1.7em;
+  line-height: 1.8em;
+  margin-bottom: 1.6em;
+}
+
+.brsmall {
+  display: block;
+  margin-bottom: -0.4em;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
 }
 
 a {
@@ -23,92 +63,66 @@ a:hover, a:focus {
   color: #e4b262;
 }
 
+body {
+  background-color: #00203f;
+  font-family: Georgia;
+  color: #ffffff;
+  text-align: center;
+  text-align-last: center;
+  margin: 0;
+  padding: 0;
+}
+
+br {
+  line-height: 50%;
+}
+
+form {
+  display: inline-block;
+}
+
 h2 {
   font-size: 6em;
-  font-family: "Pixelar";
-  margin-top: 40px;
+  font-family: Pixelar;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
   text-align: center;
   width: 100%;
   letter-spacing: -2px;
+}
+
+input[type="file"] {
+  width: 15em;
+  text-align-last: center;
 }
 
 input[type="submit"] {
   background-color: #93ebc2;
   border: none;
   color: black;
-  padding: 15px;
-  text-align: center;
+  text-align-last: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 1px 1px;
   border-radius: 12px;
-  font-family: "Georgia";
+  font-family: Georgia;
   opacity: 1;
   transition: background-color 0.75s;
+  margin: 1px;
+  padding: 15px;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, #refresh:hover {
   transition: 0.5s;
   background-color: #24c278;
+}
+
+p {
+  line-height: 1.5em;
 }
 
 select {
   font-size: 15px;
   width: 155px;
   height: 25px;
-}
-
-#user-input {
-  font-size: 1.5em;
-  line-height: 1.8em;
-}
-
-#refresh {
-  background-color: #93ebc2;
-  border: none;
-  color: black;
-  padding: 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 1px 1px;
-  border-radius: 12px;
-  font-family: "Georgia";
-  opacity: 1;
-  transition: background-color 0.75s;
-}
-
-#refresh:hover {
-  transition: 0.5s;
-  background-color: #24c278;
-}
-
-#error {
-  color: #e6c200;
-  font-size: 18px;
-}
-
-#picture {
-  border: 6px solid #e4b262;
-  max-height: 80vh;
-  max-width: 90vw;
-}
-
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.brsmall {
-  display: block;
-  margin-bottom: -0.4em;
-}
-
-.container {
-  width: 1200px;
-  margin: 0 auto;
 }
